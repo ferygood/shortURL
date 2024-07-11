@@ -26,18 +26,12 @@ This is a server for generating short URL. Users first provide their original lo
    pip install -r requirements.txt
    ```
 
-## Run
-1. Start MongoDB
-   ```bash
-   docker run -d -p 27017:27017 --name mongodb mongo
-   ```
-2. Run the app
-   ```bash
-   docker-compose up --build
-   ```
-   the app should run on http://localhost:8000
-
 ## How to use
+Run the app
+```bash
+uvicorn main:app --reload
+```
+
 After running the app, you can use tools such as cURL to interact with the api
 For example:
 ```bash
