@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Shortener</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+        .copy-btn {
+            margin-left: 10px;
+        }
+    </style>
+    <script>
+      function copyToClipboard(text) {
+          navigator.clipboard.writeText(text).then(() => {
+              const message = document.getElementById('copy-message');
+              message.classList.remove('hidden');
+              setTimeout(() => {
+                  message.classList.add('hidden');
+              }, 2000); // 显示2秒钟后隐藏
+          }).catch(err => {
+              console.error('Could not copy text: ', err);
+          });
+      }
+    </script>
+</head>
+<body>
+    <h1>URL Shortener</h1>
+    <form action="/shorten" method="post">
+        <label for="long_url">Enter URL:</label>
+        <input type="text" id="long_url" name="long_url" required>
+        <button type="submit">Shorten</button>
+    </form>
+    {% if short_url %}
+        <div id="result">
+            <p>Your input URL: <a href="{{ long_url }}" target="_blank">{{ long_url }}</a></p>
+            <p>Short URL: <a href="{{ short_url }}" target="_blank">{{ short_url }}</a></p>
+            <button class="copy-btn" onclick="copyToClipboard('{{ short_url }}')">Copy Short URL</button>
+        </div>
+    {% endif %}
+    <h2>All URLs</h2>
+    <ul>
+        {% for url in urls %}
+            <li>
+                Long URL: <a href="{{ url.long_url }}" target="_blank">{{ url.long_url }}</a><br>
+                Short URL: <a href="{{ url.short_url }}" target="_blank">{{ url.short_url }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

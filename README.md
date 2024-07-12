@@ -13,6 +13,19 @@ This is a server for generating short URL. Users first provide their original lo
 - Use short URL to redirect to long URL
 - Copy the generated short URL
 
+## Prerequisite
+If you run this app locally, you will need follow the installation: [MongoDB](https://www.mongodb.com/docs/manual/installation/). After downloading, I use macOS as an example:
+
+1. Start MongoDB
+```bash
+brew services start mongodb-community
+```
+
+2. Stop MongoDB
+```bash
+brew services stop mongodb-community
+```
+
 ## Installation
 1. Clone this repository
    ```bash
@@ -32,10 +45,13 @@ Run the app
 uvicorn main:app --reload
 ```
 
-After running the app, you can use tools such as cURL to interact with the api
+After running the app, you can paste [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your browser:
+![](images/URL_shortener.png)
+
+you can also use tools such as cURL to interact with the api
 For example:
 ```bash
-curl -X POST "http://localhost:8000/shorten" -H "Content-Type: application/json" -d '{"long_url": "https://www.google.com"}'
+curl -X POST "http://localhost:8000/api/shorten" -H "Content-Type: application/json" -d '{"long_url": "https://www.google.com"}'
 
 ```
 use the shorten url. Let says you receive a short URL: abcd123,
